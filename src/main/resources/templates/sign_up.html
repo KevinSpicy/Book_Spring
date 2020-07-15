@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SIGN_UP</title>
+</head>
+<body>
+
+
+    <form method="post" th:action="@{/users/new}">
+        <!--<div th:if="${#fields.hasErrors()}">
+            INCORRECT INFORMATION PROVIDED
+        </div> -->
+        <div th:if="${#fields.hasErrors('*')}" >HEllop</div>
+        <input name="name" type="text" placeholder="Enter name"/>
+        <span th:if="${#fields.hasErrors('name')}">...</span>
+        <br/>
+        <input name="surname" type="text" placeholder="Enter surname"/>
+      <!--  <span th:if="${#fields.hasErrors('surname')}">..</span> -->
+        <br/>
+        <input name="email" type="text" placeholder="Enter email"/>
+      <!--  <span th:if="${#fields.hasErrors('email')}">...</span> -->
+        <br/>
+        <input name="info" type="text" placeholder="Enter info"/>
+        <br/>
+        <input name="login" type="text" placeholder="Enter login"/>
+       <!--  <span th:if="${#fields.hasErrors('login')}">..</span> -->
+        <br/>
+        <input name="password" type="password" placeholder="Enter password"/>
+        <!-- <span th:if="${#fields.hasErrors('password')}">...</span> -->
+        <br/>
+        <input type="submit" value="JMI"/>
+    </form>
+</body>
+</html>
