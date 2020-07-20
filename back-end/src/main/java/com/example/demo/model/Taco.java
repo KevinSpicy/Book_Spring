@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,10 +37,6 @@ public class Taco {
     @ManyToMany(targetEntity = Ingredient.class)
     private List<Ingredient> ingredients;
 
-    @NotNull(message = "You must choose at least 1 ingredient")
-    @Transient
-    private List<String> ingredientIds;
-
     public Taco() {
     }
 
@@ -61,14 +59,6 @@ public class Taco {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<String> getIngredientIds() {
-        return ingredientIds;
-    }
-
-    public void setIngredientIds(List<String> ingredients) {
-        this.ingredientIds = ingredients;
     }
 
     public List<Ingredient> getIngredients() {

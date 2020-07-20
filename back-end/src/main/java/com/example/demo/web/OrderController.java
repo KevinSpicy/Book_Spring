@@ -58,7 +58,7 @@ public class OrderController {
 
     @GetMapping
     public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
-        List<Order> orders = orderJPARepo.findByUserOrderByPlacedAtDesc(user);
+        List<Order> orders = (List<Order>)orderJPARepo.findByUserOrderByPlacedAtDesc(user);
         List<Order> viewList = orders.stream().limit(orderProps.getPageSize()).collect(Collectors.toList());
         model.addAttribute("orders", viewList);
         return "orderList";

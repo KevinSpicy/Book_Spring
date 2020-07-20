@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { routes } from './app.routes';
 
@@ -16,6 +17,14 @@ import { LittleButtonComponent } from './little-button/little-button.component';
 import { LocationsComponent } from './locations/locations.component';
 import { SpecialsComponent } from './specials/specials.component';
 import { LoginComponent } from './login/login.component';
+import { RecentsComponent } from './recents/recents.component';
+
+import { RecentTacosService } from './services/recent-tacos.service';
+import { CartService } from './services/cart.service';
+import { DesignService } from './services/design.service';
+
+import { DesignComponent } from './design/design.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -29,14 +38,18 @@ import { LoginComponent } from './login/login.component';
     LittleButtonComponent,
     LocationsComponent,
     SpecialsComponent,
-    LoginComponent
+    LoginComponent,
+    RecentsComponent,
+    DesignComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [RecentTacosService, CartService, DesignService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

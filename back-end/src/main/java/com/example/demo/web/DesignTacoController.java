@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/*
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("order")
@@ -84,3 +84,4 @@ public class DesignTacoController {
         return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
     }
 }
+*/

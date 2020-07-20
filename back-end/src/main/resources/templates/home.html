@@ -3,11 +3,20 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>TTTT</title>
+    <title>Homepage</title>
 </head>
 <body>
-<p>Привет</p>
-<a th:href="@{/users}">USERS</a>
-<a th:href="@{/users/new}">CREATE_USER</a>
+    <h1>Welcome to Taco-Cloud</h1>
+    <img th:src="@{/images/TacoCloud.png}" />
+
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
+    </form>
+
+    <div>
+        <a th:href="@{/design}">
+            Order tacos
+        </a>
+    </div>
 </body>
 </html>

@@ -1,78 +1,54 @@
 package com.example.demo.model;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.beans.Encoder;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
 
-public class User {
-    @NotBlank(message = "Empty name")
-    @Length(min=1, max=15, message = "Name is too long or is too small")
-    private String name;
-
-    @NotBlank(message = "Empty surname")
-    @Length(min=1, max=15, message = "Surname is too long or is too small")
-    private String surname;
-
-    @Email(message = "Incorrect email")
-    private String email;
-
-    private String info = "";
-
-    @Pattern(regexp = "[a-zA-z]+\\S*", message = "Incorrect login")
-    @Length(min=1, max=15, message = "Login is too long or is too small")
-    private String login;
-
-    @Pattern(regexp = "\\S+", message = "Incorrect password")
-    @Length(min=1, max=10, message = "Password is too long or is too small")
+@Entity
+@Table(name = "users")
+public class User implements UserDetails {
+    @Id
+    private String username;
     private String password;
+    private String fullname;
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
+    private String phone;
 
-    private Date createAt;
+    public User() {}
 
-   // private boolean adminCredentials = false;
-
-    public User() {
-    }
-
-
-    public User(String name, String surname, String email, String info, String login, String password, Date createAt) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.info = info;
-        this.login = login;
+    public User(String username, String password, String fullname, String street, String city, String state, String zip, String phone) {
+        this.username = username;
         this.password = password;
-        this.createAt = createAt;
+        this.fullname = fullname;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phone = phone;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-   /* public boolean isAdmin() {
-        return adminCredentials;
-    }
-
-    public void setAdminCredentials(Boolean adminCredentials) {
-        this.adminCredentials = adminCredentials;
-    }*/
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
+    @Override
     public String getPassword() {
         return password;
     }
@@ -81,51 +57,81 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getStreet() {
+        return street;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCity() {
+        return city;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getInfo() {
-        return info;
+    public String getState() {
+        return state;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(name, user.name) &&
-                Objects.equals(surname, user.surname) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(info, user.info);
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name, surname, email, info);
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

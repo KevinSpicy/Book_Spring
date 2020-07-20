@@ -3,7 +3,7 @@
     <div class="topbar">
         <div class="topbaritems">
             <div class="topbaritem" style="font-size: 17pt;">
-                <a [routerLink]="['design']" class="plainLink caps">Desing a Taco</a>
+                <a [routerLink]="['design']" class="plainLink caps">Design a Taco</a>
             </div>
             <div class="topbaritem">
                 <a href="login" class="plainLink">
@@ -15,6 +15,7 @@
             <div class="topbaritem" style="font-size: 17pt;">
                 <a [routerLink]="['cart']" class="plainlink">
                   <img src="assets/cart.png" align="center"/>
+                  {{getCartService().getCartTotal() | currency}}
                 </a>
               </div>
         </div>
