@@ -37,6 +37,18 @@ public class Taco {
     @ManyToMany(targetEntity = Ingredient.class)
     private List<Ingredient> ingredients;
 
+    @Transient
+    @JsonIgnore
+    private List<String> ingredientIds;
+
+    public List<String> getIngredientIds() {
+        return ingredientIds;
+    }
+
+    public void setIngredientIds(List<String> ingredientIds) {
+        this.ingredientIds = ingredientIds;
+    }
+
     public Taco() {
     }
 

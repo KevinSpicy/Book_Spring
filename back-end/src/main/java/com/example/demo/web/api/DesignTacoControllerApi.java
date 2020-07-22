@@ -7,6 +7,7 @@ import com.example.demo.web.api.resource.TacoResource;
 import com.example.demo.web.api.resource.resourceassembler.TacoResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,12 +46,13 @@ public class DesignTacoControllerApi {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
+    public ResponseEntity<EntityModel<TacoResource>> tacoById(@PathVariable("id") Long id) {
         Optional<Taco> taco = tacoJPARepo.findById(id);
-        if (taco.isPresent()) {
-            return new ResponseEntity<>(taco.get(), HttpStatus.OK);
+        if (!taco.isPresent()) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        EntityModel<TacoResource> tacoResource = new EntityModel<TacoResource>(new TacoResourceAssembler().toModel(taco.get()));
+        return new ResponseEntity<>(tacoResource, HttpStatus.OK);
     }
     
     @PostMapping(consumes="application/json")

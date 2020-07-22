@@ -2,7 +2,9 @@ package com.example.demo.web.api.resource;
 
 import com.example.demo.model.Ingredient;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
+@Relation(collectionRelation = "ingredients")
 public class IngredientResource extends RepresentationModel<IngredientResource> {
 
     private String name;
